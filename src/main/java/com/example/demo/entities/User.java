@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -12,16 +13,16 @@ import jakarta.persistence.Table;
 
 
 
-@Entity
-@Table(name = "tb-user")
+@Entity // Define que esta classe é uma entidade JPA
+@Table(name = "tb_user") // Corrigido para underscore (convenção SQL)
 public class User implements Serializable {
 
 
- 
+	@Serial
     private static final long serialVersionUID = 1L;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o banco gera o ID
 	private Long id;
 	private String name;
 	private String email;
