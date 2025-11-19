@@ -2,32 +2,34 @@ package com.example.demo.entities;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-  
-
-
 
 @Entity // Define que esta classe é uma entidade JPA
 @Table(name = "tb_user") // Corrigido para underscore (convenção SQL)
 public class User implements Serializable {
 
-
 	@Serial
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o banco gera o ID
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // Define que o banco gera o ID
 	private Long id;
 	private String name;
 	private String email;
 	private String phone;
 	private String password;
+
+	@OneToMany(mappedBy = "client")
+	private List<Order> orders = new ArrayList<Order>();
 
 	public User() {
 		// TODO Auto-generated constructor stub
@@ -81,6 +83,12 @@ public class User implements Serializable {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+
+	
+	public List<Order> getOrders() {
+		return orders;
+	}
+
 
 	@Override
 	public int hashCode() {
